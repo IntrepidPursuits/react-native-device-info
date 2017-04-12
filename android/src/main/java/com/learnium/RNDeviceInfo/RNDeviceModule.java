@@ -23,6 +23,10 @@ import java.util.TimeZone;
 
 import javax.annotation.Nullable;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+
 public class RNDeviceModule extends ReactContextBaseJavaModule {
 
   ReactApplicationContext reactContext;
@@ -106,6 +110,16 @@ public class RNDeviceModule extends ReactContextBaseJavaModule {
         deviceName = myDevice.getName();
       }
     } catch(Exception e) {
+      e.printStackTrace();
+    }
+
+    constants.put("isDebug", false);
+    try {
+      Class<?> buildConfigClass = Class.forName(packageName + ".BuildConfig");
+      Field debugField = buildConfigClass.getField("DEBUG");
+      boolean value = debugField.getBoolean(null);
+      constants.put("isDebug", value);
+    } catch (Exception e) {
       e.printStackTrace();
     }
 
