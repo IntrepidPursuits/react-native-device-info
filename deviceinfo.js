@@ -62,6 +62,9 @@ module.exports = {
   isTablet: function() {
     return RNDeviceInfo.isTablet;
   },
+  isDebug: function() {
+    return RNDeviceInfo.isDebug;
+  },
   isPinOrFingerprintSet: function () {
     return RNDeviceInfo.isPinOrFingerprintSet;
   },
